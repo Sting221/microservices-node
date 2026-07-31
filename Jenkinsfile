@@ -17,10 +17,8 @@ pipeline{
             steps {
                 script {
                     def scannerHome = tool 'sonarqube'
-                    withSonarQubeEnv('sonar-dummy') {
-                        dir('microservices'){// If you have configured more than one global server connection, you can specify its name as configured in Jenkins
-                            sh "${scannerHome}/bin/sonar-scanner"
-                        }
+                    withSonarQubeEnv('sonar-dummy')
+                            sh "${scannerHome}/bin/sonar-scanner
                     }
                 }
             }
