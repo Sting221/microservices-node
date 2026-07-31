@@ -19,7 +19,6 @@ pipeline{
                     def scannerHome = tool 'sonarqube'
                     withSonarQubeEnv('sonar-dummy')  {
                       sh "${scannerHome}/bin/sonar-scanner"
-                       }
                     }
                 }
             }
