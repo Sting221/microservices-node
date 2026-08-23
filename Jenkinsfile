@@ -36,10 +36,9 @@ pipeline{
             steps {
                 sh '''
                 docker build -t test1:v1 ./books
-                docker build -t test2:v1 ./images
-                docker build -t test3:v1 ./search
-                docker build -t test4:v1 ./videos
-                docker build -t test5:v1 ./web
+                docker build -t test2:v1 ./search
+                docker build -t test3:v1 ./videos
+                docker build -t test4:v1 ./web
                 '''
             }
         }
