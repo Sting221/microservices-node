@@ -62,7 +62,7 @@ pipeline{
                           
                           sh '''
                           
-                          echo password "$PASSWORD" | docker login "$horbor_url" -u "$USERNAME" --password-stdin
+                          echo "$PASSWORD" | docker login "$horbor_url" -u "$USERNAME" --password-stdin
                           '''
                       }
             }
