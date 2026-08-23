@@ -62,9 +62,31 @@ pipeline{
                           
                           sh '''
                           
-                          echo "$PASSWORD" | docker login "$harbor_url" -u "$USERNAME" --password-stdin
+                          echo password "$PASSWORD" | docker login "$harbor_url" -u "$USERNAME" --password-stdin
                           '''
                       }
+            }
+        }
+
+        stage ("Tag") {
+            steps{
+                sh '''
+                docker tag test1:v1 harbor.local/test-microservice/test1:v1
+                docker tag test2:v1 harbor.local/test-microservice/test2:v1
+                docker tag test3:v1 harbor.local/test-microservice/test3:v1
+                docker tag test4:v1 harbor.local/test-microservice/test4:v1
+                '''
+            }
+        }
+
+        stage ("Push") {
+            steps {
+                sh '''
+                docker push harbor.local/test-microservice/test1:v1
+                docker push harbor.local/test-microservice/test2:v1
+                docker push harbor.local/test-microservice/test3:v1
+                docker push harbor.local/test-microservice/test4:v1
+                '''
             }
         }
     }
