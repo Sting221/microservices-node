@@ -5,6 +5,10 @@ pipeline{
         nodejs 'Node20'
     }
 
+    environment {
+        harbor_url = "harbor.local"
+    }
+
     stages{
         stage('checkout'){
             steps{
@@ -46,6 +50,21 @@ pipeline{
         stage("image") {
             steps {
                 sh 'docker images'
+            }
+        }
+
+        stage("Harbor Login") {
+            steps {
+                withCredentials([usernamePassword(
+                      credentialsId: 'harbor-cred',
+                      usernameVariable: 'USERNAME',
+                      passwordVariable: 'PASSWORD')]) {
+                          
+                          sh '''
+                          
+                          echo password "$PASSWORD" | docker login "$horbor_url" -u "$USERNAME" --password-stdin
+                          '''
+                      }
             }
         }
     }
